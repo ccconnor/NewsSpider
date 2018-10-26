@@ -27,7 +27,7 @@ class BiShiJie(scrapy.Spider):
             return
         contents = contents[0]["buttom"]
         count = len(contents)
-        print(count, 'items crawled ...')
+        self.logger.info('%s items crawled' % count)
         for item in contents:
             issue_time = item['issue_time']
             newsflash_id = item['newsflash_id']
@@ -36,7 +36,7 @@ class BiShiJie(scrapy.Spider):
                        'title': item['title'],
                        'content': item['content']}
             if self.post.find({'newsflash_id': newsflash_id}).count() != 0:
-                print('newsflash_id %s has existed.' % newsflash_id)
+                self.logger.info('newsflash_id %s has existed' % newsflash_id)
                 return
             self.post.insert(db_item)
 
