@@ -19,7 +19,7 @@ NEWSPIDER_MODULE = 'news.spiders'
 #USER_AGENT = 'news (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -64,9 +64,9 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'news.pipelines.NewsPipeline': 300,
-#}
+ITEM_PIPELINES = {
+    'news.pipelines.NewsPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -91,3 +91,7 @@ ROBOTSTXT_OBEY = True
 
 LOG_LEVEL = 'INFO'
 LOG_FILE = 'news.log'
+
+MONGO_HOST = 'localhost'
+MONGO_PORT = 27017
+MONGO_DB = 'news'

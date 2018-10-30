@@ -5,10 +5,21 @@
 # See documentation in:
 # https://doc.scrapy.org/en/latest/topics/items.html
 
-import scrapy
+from scrapy import Item, Field
 
 
-class NewsItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+class NewsItem(Item):
+    _id = Field()
+    issue_time = Field()
+    title = Field()
+    content = Field()
+    upvote = Field()
+    downvote = Field()
+
+
+class BishijieNewsItem(NewsItem):
+    collection = 'bishijie'
+
+
+class JinsecaijingNewsItem(NewsItem):
+    collection = 'jinsecaijing'
