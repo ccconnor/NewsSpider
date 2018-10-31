@@ -10,16 +10,9 @@ from scrapy import Item, Field
 
 class NewsItem(Item):
     _id = Field()
-    issue_time = Field()
+    time = Field()
+    source = Field()
     title = Field()
     content = Field()
     upvote = Field()
     downvote = Field()
-
-
-class BishijieNewsItem(NewsItem):
-    collection = 'bishijie'
-
-
-class JinsecaijingNewsItem(NewsItem):
-    collection = 'jinsecaijing'

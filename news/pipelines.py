@@ -10,30 +10,41 @@ from scrapy.exceptions import DropItem
 
 
 class NewsPipeline(object):
-    def __init__(self, mongo_uri, mongo_port, mongo_db):
-        self.mongo_uri = mongo_uri
+    def __init__(self, mongo_host, mongo_port, mongo_db, mongo_user, mongo_pass):
+        self.mongo_host = mongo_host
         self.mongo_port = mongo_port
         self.mongo_db = mongo_db
+        self.mongo_user = mongo_user
+        self.mongo_pass = mongo_pass
 
     @classmethod
     def from_crawler(cls, crawler):
         return cls(
-            mongo_uri=crawler.settings.get('MONGO_HOST'),
+            mongo_host=crawler.settings.get('MONGO_HOST'),
             mongo_port=crawler.settings.get('MONGO_PORT'),
-            mongo_db=crawler.settings.get('MONGO_DB')
+            mongo_db=crawler.settings.get('MONGO_DB'),
+            mongo_user=crawler.settings.get('MONGO_USER'),
+            mongo_pass=crawler.settings.get('MONGO_PASS')
         )
 
     def open_spider(self, spider):
-        self.client = pymongo.MongoClient(self.mongo_uri)
-        self.db = self.client[self.mongo_db]
-        self.db['bishijie'].create_index([("issue_time", pymongo.DESCENDING)], background=True)
+        self.client = pymongo.MongoClient("mongodb://{}:{}@{}:{}/?authSource={}"
+                                          .format(self.mongo_user,
+                                                  self.mongo_pass,
+                                                  self.mongo_host,
+                                                  self.mongo_port,
+                                                  self.mongo_db))
+        # self.client = pymongo.MongoClient(self.mongo_host)
+        db = self.client[self.mongo_db]
+        self.collection = db['newsflash']
+        self.collection.create_index([("time", pymongo.DESCENDING)], background=True)
 
     def process_item(self, item, spider):
-        collection = item.collection
-        if self.db[collection].find({'_id': item['_id']}).count() == 0:
-            self.db[collection].insert_one(dict(item))
+        if self.collection.find({'_id': item['_id']}).count() == 0:
+            self.collection.insert_one(dict(item))
         else:
-            raise DropItem('news_id %s has existed' % item['_id'])
+            # raise DropItem('news_id %s has existed' % item['_id'])
+            pass
         return item
 
     def close_spider(self, spider):
