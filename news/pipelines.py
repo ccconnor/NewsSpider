@@ -10,10 +10,11 @@ from scrapy.exceptions import DropItem
 
 
 class NewsPipeline(object):
-    def __init__(self, mongo_host, mongo_port, mongo_db, mongo_user, mongo_pass):
+    def __init__(self, mongo_host, mongo_port, mongo_db, mongo_auth_db, mongo_user, mongo_pass):
         self.mongo_host = mongo_host
         self.mongo_port = mongo_port
         self.mongo_db = mongo_db
+        self.mongo_auth_db = mongo_auth_db
         self.mongo_user = mongo_user
         self.mongo_pass = mongo_pass
 
@@ -23,6 +24,7 @@ class NewsPipeline(object):
             mongo_host=crawler.settings.get('MONGO_HOST'),
             mongo_port=crawler.settings.get('MONGO_PORT'),
             mongo_db=crawler.settings.get('MONGO_DB'),
+            mongo_auth_db=crawler.settings.get('MONGO_AUTH_DB'),
             mongo_user=crawler.settings.get('MONGO_USER'),
             mongo_pass=crawler.settings.get('MONGO_PASS')
         )
@@ -33,7 +35,7 @@ class NewsPipeline(object):
                                                   self.mongo_pass,
                                                   self.mongo_host,
                                                   self.mongo_port,
-                                                  self.mongo_db))
+                                                  self.mongo_auth_db))
         # self.client = pymongo.MongoClient(self.mongo_host)
         db = self.client[self.mongo_db]
         self.collection = db['newsflash']

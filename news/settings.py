@@ -92,8 +92,9 @@ ITEM_PIPELINES = {
 LOG_LEVEL = 'INFO'
 # LOG_FILE = 'news.log'
 
-MONGO_HOST = '52.230.122.251'
-MONGO_PORT = 28018
-MONGO_DB = 'admin'
-MONGO_USER = 'root'
-MONGO_PASS = '1qaz2wsx3edc!'
+MONGO_HOST = 'localhost'
+MONGO_PORT = 27017
+MONGO_DB = 'news'
+MONGO_AUTH_DB = 'admin'
+MONGO_USER = 'admin'
+MONGO_PASS = 'admin'

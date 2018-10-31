@@ -16,7 +16,7 @@ class BiShiJie(scrapy.Spider):
 
     name = "bishijie"
     start_urls = [
-        'http://www.bishijie.com/api/newsv17/index?size=50&client=pc'
+        'http://www.bishijie.com/api/newsv17/index?size=20&client=pc'
     ]
 
     def parse(self, response):
@@ -40,7 +40,7 @@ class BiShiJie(scrapy.Spider):
 class JinSe(scrapy.Spider):
     name = 'jinse'
     start_urls = [
-        'https://api.jinse.com/v4/live/list?limit=50&reading=false&source=web&flag=down'
+        'https://api.jinse.com/v4/live/list?limit=20&reading=false&source=web&flag=down'
     ]
 
     def parse(self, response):
