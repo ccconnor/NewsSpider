@@ -16,3 +16,4 @@ class NewsItem(Item):
     content = Field()
     upvote = Field()
     downvote = Field()
+    shares = Field()

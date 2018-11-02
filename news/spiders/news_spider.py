@@ -34,6 +34,7 @@ class BiShiJie(scrapy.Spider):
             item['content'] = news.get('content')
             item['upvote'] = 0
             item['downvote'] = 0
+            item['shares'] = 0
             yield item
 
 
@@ -59,4 +60,5 @@ class JinSe(scrapy.Spider):
             item['content'] = content[3]
             item['upvote'] = 0
             item['downvote'] = 0
+            item['shares'] = 0
             yield item
