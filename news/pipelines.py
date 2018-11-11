@@ -30,13 +30,13 @@ class NewsPipeline(object):
         )
 
     def open_spider(self, spider):
-        self.client = pymongo.MongoClient("mongodb://{}:{}@{}:{}/?authSource={}"
-                                          .format(self.mongo_user,
-                                                  self.mongo_pass,
-                                                  self.mongo_host,
-                                                  self.mongo_port,
-                                                  self.mongo_auth_db))
-        # self.client = pymongo.MongoClient(self.mongo_host)
+        # self.client = pymongo.MongoClient("mongodb://{}:{}@{}:{}/?authSource={}"
+        #                                   .format(self.mongo_user,
+        #                                           self.mongo_pass,
+        #                                           self.mongo_host,
+        #                                           self.mongo_port,
+        #                                           self.mongo_auth_db))
+        self.client = pymongo.MongoClient()
         db = self.client[self.mongo_db]
         self.collection = db['newsflash']
         self.collection.create_index([("time", pymongo.DESCENDING)], background=True)

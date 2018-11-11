@@ -15,8 +15,8 @@ def run_for_linux():
 
 
 def run_for_windows():
-    # scrapy.cmdline.execute(['scrapy', 'crawl', 'bishijie'])
-    scrapy.cmdline.execute(['scrapy', 'crawl', 'jinse'])
+    scrapy.cmdline.execute(['scrapy', 'crawl', 'bishijie'])
+    # scrapy.cmdline.execute(['scrapy', 'crawl', 'jinse'])
 
 
 run_for_windows()
