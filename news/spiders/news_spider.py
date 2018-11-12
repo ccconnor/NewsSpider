@@ -29,18 +29,9 @@ class BiShiJie(scrapy.Spider):
             item = NewsItem()
             item['_id'] = md5('bishijie' + 'newsfalsh' + str(news.get('newsflash_id')))
             item['createTime'] = news.get('issue_time')
-            item['publishTime'] = news.get('issue_time')
-            item['author'] = '网络文章'
-            item['source'] = '币世界'
             item['title'] = news.get('title')
             item['content'] = news.get('content')
-            item['upvotes'] = 0
-            item['shares'] = 0
-            item['comments'] = 0
-            item['top'] = False;
-            item['hot'] = False;
-            item['expire'] = 0;
-            item['draft'] = False;
+            item['source'] = '币世界'
             yield item
 
 
@@ -61,16 +52,7 @@ class JinSe(scrapy.Spider):
             content = news.get('content').replace('【','|').replace('】','|').split('|')
             item['_id'] = md5('jinsecaijing' + 'newsflash' + str(news.get('id')))
             item['createTime'] = news.get('created_at')
-            item['publishTime'] = news.get('created_at')
-            item['author'] = '网络文章'
-            item['source'] = '金色财经'
             item['title'] = content[-2].strip()
             item['content'] = content[-1]
-            item['upvotes'] = 0
-            item['shares'] = 0
-            item['comments'] = 0
-            item['top'] = False;
-            item['hot'] = False;
-            item['expire'] = 0;
-            item['draft'] = False;
+            item['source'] = '金色财经'
             yield item

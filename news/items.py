@@ -15,6 +15,7 @@ class NewsItem(Item):
     source = Field()
     author = Field()
     title = Field()
+    image = Field()
     content = Field()
     upvotes = Field()
     shares = Field()

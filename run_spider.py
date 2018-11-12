@@ -19,4 +19,4 @@ def run_for_windows():
     # scrapy.cmdline.execute(['scrapy', 'crawl', 'jinse'])
 
 
-run_for_windows()
+run_for_linux()

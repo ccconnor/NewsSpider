@@ -92,9 +92,14 @@ ITEM_PIPELINES = {
 LOG_LEVEL = 'INFO'
 # LOG_FILE = 'news.log'
 
-MONGO_HOST = '192.168.1.6'
+MONGO_HOST = '127.0.0.1'
 MONGO_PORT = 28018
 MONGO_DB = 'app_db'
 MONGO_AUTH_DB = 'app_db'
 MONGO_USER = 'appadmin'
 MONGO_PASS = '1qaz2wsx3edc!'
+
+REDIS_HOST = '127.0.0.1'
+REDIS_PORT = 36379
+REDIS_PASS = '1qaz2wsx3edc!'
+REDIS_DB = 0
