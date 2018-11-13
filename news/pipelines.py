@@ -63,7 +63,7 @@ class NewsPipeline(object):
             item['top'] = False
             item['hot'] = False
             item['expire'] = 0
-            if self.redis.get('newsflash_auto_release') == 'true':
+            if self.redis.get('newsflash_auto_release').decode() == 'true':
                 item['draft'] = False
                 item['publishTime'] = item['createTime']
             else:
