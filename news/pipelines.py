@@ -55,8 +55,8 @@ class NewsPipeline(object):
 
     def process_item(self, item, spider):
         if self.collection.find({'_id': item['_id']}).count() == 0:
-            item['author'] = '网络文章'
-            item['image'] = 'image--957970183-4761853cb2a04a7ab615098a0e99fbce.jpeg'
+            item['author'] = '网络抓取'
+            # item['image'] = 'image--957970183-4761853cb2a04a7ab615098a0e99fbce.jpeg'
             item['upvotes'] = 0
             item['shares'] = 0
             item['comments'] = 0
