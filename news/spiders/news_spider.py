@@ -49,10 +49,10 @@ class JinSe(scrapy.Spider):
         self.logger.info('size of contents is %s' % len(contents))
         for news in contents:
             item = NewsItem()
-            content = news.get('content').replace('【','|').replace('】','|').split('|')
+            pos = news.get('content').find('】')
             item['_id'] = md5('jinsecaijing' + 'newsflash' + str(news.get('id')))
             item['createTime'] = news.get('created_at')
-            item['title'] = content[-2].strip()
-            item['content'] = content[-1]
+            item['title'] = news.get('content')[1:pos]
+            item['content'] = news.get('content')[pos+1:]
             item['source'] = '金色财经'
             yield item
