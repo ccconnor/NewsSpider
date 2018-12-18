@@ -16,4 +16,4 @@ scrapy list
 scrapy crawl bishijie
 
 ### 定时运行
-nohup python3 run_spider.py >run_spider.out 2>&1 &
+nohup python3 -u run_spider.py >run_spider.out 2>&1 &
