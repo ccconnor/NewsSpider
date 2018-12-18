@@ -63,21 +63,29 @@ class BiKuaiBao(scrapy.Spider):
     name = 'bikuaibao'
 
     def start_requests(self):
-        url = 'http://api-qa.beekuaibao.com/thirdparty/getOpenData/V2'
+        # 测试环境
+        # key = 'bkb88888888'
+        # url = 'http://api-qa.beekuaibao.com/thirdparty/getOpenData/V2'
+
+        # 生产环境
+        url = 'https://api.beekuaibao.com/thirdparty/getOpenData/V2'
+        key = '07360FD5946F9F7620942E18EA9EFF48'
+
         headers = {
             'Content-Type': 'application/json'
         }
+
         data = collections.OrderedDict()
         data['businessNo'] = 'B100000'
         data['tag'] = ''
         data['requestId'] = '12345678'
         data['id'] = ''
         json_data = json.dumps(data).replace(' ', '')
-        key = 'bkb88888888'
         sha512 = hashlib.sha512()
         sha512.update(key.encode('utf-8'))
         sha512.update(json_data.encode('utf-8'))
         signature = sha512.hexdigest().upper()
+
         body = {
             'channel': 'imapp',
             'sign': signature,
