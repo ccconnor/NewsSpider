@@ -11,13 +11,13 @@ import redis
 def get_news_source():
     redis_client = redis.Redis(REDIS_HOST, REDIS_PORT, REDIS_DB, REDIS_PASS)
     if redis_client is None:
-        return None
+        return []
     sources = redis_client.get('news_source')
     if sources is None:
-        return None
+        return []
     source_list = sources.decode().split(';')
     if len(source_list) == 0:
-        return None
+        return []
     return source_list
 
 
@@ -25,9 +25,8 @@ def run_for_linux():
     while True:
         print('run spider at %s' % time.asctime(time.localtime(time.time())))
         source_list = get_news_source()
-        if source_list is None:
-            scrapy.cmdline.execute(['scrapy', 'crawl', 'bishijie'])
-            return
+        if len(source_list) == 0:
+            source_list.append('金色财经')
         for source in source_list:
             print('crawling', source)
             if source == '金色财经':
