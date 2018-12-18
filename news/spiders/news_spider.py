@@ -2,6 +2,7 @@
 
 import json
 import hashlib
+import collections
 import scrapy
 from news.items import NewsItem
 
@@ -66,19 +67,17 @@ class BiKuaiBao(scrapy.Spider):
         headers = {
             'Content-Type': 'application/json'
         }
-        data = {
-            'businessNo': 'B100000',
-            'tag': '',
-            'requestId': '12345678',
-            'id': ''
-        }
+        data = collections.OrderedDict()
+        data['businessNo'] = 'B100000'
+        data['tag'] = ''
+        data['requestId'] = '12345678'
+        data['id'] = ''
         json_data = json.dumps(data).replace(' ', '')
         key = 'bkb88888888'
         sha512 = hashlib.sha512()
         sha512.update(key.encode('utf-8'))
         sha512.update(json_data.encode('utf-8'))
         signature = sha512.hexdigest().upper()
-        print('signature:', signature)
         body = {
             'channel': 'imapp',
             'sign': signature,
